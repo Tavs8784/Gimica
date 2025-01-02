@@ -3,17 +3,7 @@ guid: 52e41d5bbfe6f451cac17041e8b082d9
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Present
-    second: {fileID: 2100000, guid: 698496216df9546fba33bbe672db9759, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Ruban
-    second: {fileID: 2100000, guid: a017f775530944d7cbcefe48f468d3b6, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

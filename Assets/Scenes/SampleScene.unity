@@ -5284,6 +5284,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1640057289}
   m_PrefabAsset: {fileID: 0}
+--- !u!320 &426965626 stripped
+PlayableDirector:
+  m_CorrespondingSourceObject: {fileID: 2107520277415785166, guid: 00c42abb2e796426d91eba0b2f31a0d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1640057289}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &625609949
 GameObject:
   m_ObjectHideFlags: 0
@@ -5425,6 +5431,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &735862736 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6507150166309656333, guid: 00c42abb2e796426d91eba0b2f31a0d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1640057289}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -5498,7 +5510,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1214182842}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -10.48, z: 0}
+  m_LocalPosition: {x: -0.05, y: -7.02, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -5746,6 +5758,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1214182843}
     m_Modifications:
+    - target: {fileID: 2107520277415785166, guid: 00c42abb2e796426d91eba0b2f31a0d3,
+        type: 3}
+      propertyPath: m_SceneBindings.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2107520277415785166, guid: 00c42abb2e796426d91eba0b2f31a0d3,
+        type: 3}
+      propertyPath: m_SceneBindings.Array.data[1].key
+      value: 
+      objectReference: {fileID: 2451374239787128665, guid: e51f9f3c900e34de48318fe2b98eddad,
+        type: 2}
+    - target: {fileID: 2107520277415785166, guid: 00c42abb2e796426d91eba0b2f31a0d3,
+        type: 3}
+      propertyPath: m_SceneBindings.Array.data[1].value
+      value: 
+      objectReference: {fileID: 735862736}
     - target: {fileID: 5168600929339655016, guid: 00c42abb2e796426d91eba0b2f31a0d3,
         type: 3}
       propertyPath: m_Name
@@ -5855,6 +5883,11 @@ MonoBehaviour:
   shineAlphaStart: 0
   shineAlphaEnd: 0.7
   shineAlphaDuration: 0.3
+  presentShakeDuration: 1
+  presentShakeStrength: 6.82
+  presentShakeVibrato: 14
+  presentShakeRandomness: 1.82
+  lidAnim: {fileID: 426965626}
 --- !u!4 &1730276477
 Transform:
   m_ObjectHideFlags: 0

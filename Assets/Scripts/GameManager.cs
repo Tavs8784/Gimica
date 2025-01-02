@@ -1,29 +1,38 @@
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using UnityEngine.Playables;
 
 public class GameManager : MonoBehaviour
 {
     [Header("Intro")]
-    [SerializeField] private RectTransform introButton; // UI button to shake
+    [SerializeField] private RectTransform introButton; 
     [SerializeField] private float shakeDuration = 0.5f;
     [SerializeField] private float shakeStrength = 50f;
     [SerializeField] private int shakeVibrato = 10;
     [SerializeField] private float shakeRandomness = 90f;
-    [SerializeField] private Transform presentTransform; // The Present
-    [SerializeField] private Transform startPoint;       // Starting position
-    [SerializeField] private Transform endPoint;         // Ending position
-    [SerializeField] private float moveDuration = 2f;    // Time to move from start to end
-    [SerializeField] private float rotationDuration = 5f;// Time per 360° spin
+    [SerializeField] private Transform presentTransform; 
+    [SerializeField] private Transform startPoint;       
+    [SerializeField] private Transform endPoint;         
+    [SerializeField] private float moveDuration = 2f;    
+    [SerializeField] private float rotationDuration = 5f;
     [SerializeField] private int rotationLoops = 3;
     [SerializeField] private float rotationTarget = 360f;
     [SerializeField] private float scaleUpDuration = 0.5f;
-    [SerializeField] private Vector3 scaleTarget = new Vector3(13f, 13f, 13f);
+    [SerializeField] private Vector3 scaleTarget;
     [SerializeField] private Image shineUIElement;
     private Material shineMaterial;
     [SerializeField] private float shineAlphaStart = 0f;
     [SerializeField] private float shineAlphaEnd = 1f;
     [SerializeField] private float shineAlphaDuration = 1f;
+    [Space]
+    [Header("Opening")]
+    [SerializeField] private float presentShakeDuration;
+    [SerializeField] private float presentShakeStrength;
+    [SerializeField] private int presentShakeVibrato;
+    [SerializeField] private float presentShakeRandomness;
+    [SerializeField] private PlayableDirector lidAnim;
+
 
     public void PlayIntro()
     {
@@ -98,7 +107,7 @@ public class GameManager : MonoBehaviour
         );
 
        
-        if (shineUIElement != null && shineMaterial != null)
+        if (shineUIElement != null)
         {
             revealSequence.Join(
                 DOTween.To(
@@ -110,5 +119,17 @@ public class GameManager : MonoBehaviour
                 .SetEase(Ease.OutBack)
             );
         }
+    }
+
+    public void ShakePresent()
+    {
+        presentTransform.DOShakeRotation(
+            presentShakeDuration,   
+            presentShakeStrength,   
+            presentShakeVibrato,    
+            presentShakeRandomness,
+            true
+        )
+        .OnComplete(()=>lidAnim.Play());
     }
 }

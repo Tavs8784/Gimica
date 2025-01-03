@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float presentShakeRandomness;
     
     [SerializeField] private PlayableDirector lidAnim;
+    [SerializeField] private GameObject coinParticles;
 
 
     private void ShowTextBubble(bool on,bool onAnim)
@@ -150,6 +151,11 @@ public class GameManager : MonoBehaviour
             presentShakeRandomness,
             true
         )
-        .OnComplete(()=>lidAnim.Play());
+        .OnComplete(()=>
+        {
+        coinParticles.SetActive(true);
+        lidAnim.Play();
+        Debug.LogWarning("YOU WON 100000000 COINS");
+        });
     }
 }

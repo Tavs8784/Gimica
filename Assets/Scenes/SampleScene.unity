@@ -5193,7 +5193,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2
+  m_Intensity: 5.3
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -5783,7 +5783,7 @@ MonoBehaviour:
   ribbon5: {fileID: 512273693}
   startColor: {r: 1, g: 1, b: 1, a: 1}
   endColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
-  duration: 2
+  duration: 0.8
 --- !u!1 &1320476557
 GameObject:
   m_ObjectHideFlags: 0
@@ -6024,6 +6024,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1214182843}
     m_Modifications:
+    - target: {fileID: 707776990069182713, guid: 00c42abb2e796426d91eba0b2f31a0d3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2107520277415785166, guid: 00c42abb2e796426d91eba0b2f31a0d3,
         type: 3}
       propertyPath: m_SceneBindings.Array.size
@@ -6155,6 +6160,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6507150166309656333, guid: 00c42abb2e796426d91eba0b2f31a0d3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7470190733616029820, guid: 00c42abb2e796426d91eba0b2f31a0d3,
         type: 3}
       propertyPath: m_IsActive
@@ -6215,6 +6225,7 @@ MonoBehaviour:
   presentShakeVibrato: 14
   presentShakeRandomness: 1.82
   lidAnim: {fileID: 426965626}
+  coinParticles: {fileID: 1837776875}
 --- !u!4 &1730276477
 Transform:
   m_ObjectHideFlags: 0
@@ -6365,6 +6376,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1770964430}
   m_CullTransparentMesh: 1
+--- !u!1 &1837776875 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 707776990069182713, guid: 00c42abb2e796426d91eba0b2f31a0d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1640057289}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1986769186
 GameObject:
   m_ObjectHideFlags: 0

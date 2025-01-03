@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float shakeStrength = 50f;
     [SerializeField] private int shakeVibrato = 10;
     [SerializeField] private float shakeRandomness = 90f;
-    [SerializeField] private Transform presentTransform; 
+    [SerializeField] private Transform presentTransform;
+    [SerializeField] private Transform presentTextBubble; 
     [SerializeField] private Transform startPoint;       
     [SerializeField] private Transform endPoint;         
     [SerializeField] private float moveDuration = 2f;    
@@ -34,6 +35,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayableDirector lidAnim;
 
 
+    private void ShowTextBubble(bool on,bool onAnim)
+    {
+        presentTextBubble.gameObject.SetActive(on);
+        presentTextBubble.localScale = Vector3.zero;
+        if (onAnim)
+        presentTextBubble.DOScale(1, 0.5f)
+                            .SetDelay(0.3f)
+                            .SetEase(Ease.OutBack);
+
+    }
+    
     public void PlayIntro()
     {
         Reveal();
@@ -54,6 +66,8 @@ public class GameManager : MonoBehaviour
                 introButton.gameObject.SetActive(false);
 
                 RevealPresent();
+                ShowTextBubble(true,true);
+                
             });
     }
     private void RevealPresent()
@@ -89,7 +103,6 @@ public class GameManager : MonoBehaviour
             presentTransform.DOMove(endPoint.position, moveDuration)
                             .SetEase(Ease.OutBack)
         );
-
         revealSequence.Join(
             presentTransform.DOScale(scaleTarget, scaleUpDuration)
                             .SetEase(Ease.OutBack)
@@ -105,8 +118,8 @@ public class GameManager : MonoBehaviour
             .SetLoops(rotationLoops, LoopType.Restart)
             .SetEase(Ease.OutBack)
         );
-
-       
+        
+      
         if (shineUIElement != null)
         {
             revealSequence.Join(
@@ -119,10 +132,14 @@ public class GameManager : MonoBehaviour
                 .SetEase(Ease.OutBack)
             );
         }
+        
+
+
     }
 
     public void ShakePresent()
     {
+        ShowTextBubble(false,false);
         presentTransform.DOShakeRotation(
             presentShakeDuration,   
             presentShakeStrength,   

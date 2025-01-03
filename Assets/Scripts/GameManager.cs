@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float presentShakeStrength;
     [SerializeField] private int presentShakeVibrato;
     [SerializeField] private float presentShakeRandomness;
+    
     [SerializeField] private PlayableDirector lidAnim;
 
 
@@ -139,6 +140,8 @@ public class GameManager : MonoBehaviour
 
     public void ShakePresent()
     {
+        MatController colorAnim = presentTransform.GetComponent<MatController>();
+        colorAnim.StopColorAnimation();
         ShowTextBubble(false,false);
         presentTransform.DOShakeRotation(
             presentShakeDuration,   

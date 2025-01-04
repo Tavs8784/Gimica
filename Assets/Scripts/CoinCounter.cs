@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System; // <-- For Action
+using System;
 
 public class CoinCounter : MonoBehaviour
 {
@@ -24,7 +24,6 @@ public class CoinCounter : MonoBehaviour
 
     private void Update()
     {
-        // Check if the Particle System is playing
         if (targetParticleSystem.isPlaying)
         {
             if (!wasPlaying)
@@ -45,7 +44,6 @@ public class CoinCounter : MonoBehaviour
         }
         else
         {
-            // Particle system has stopped
             if (wasPlaying && isCounting)
             {
                 StopCounting();

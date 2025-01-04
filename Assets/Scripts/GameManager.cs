@@ -2,6 +2,7 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float shineAlphaStart = 0f;
     [SerializeField] private float shineAlphaEnd = 1f;
     [SerializeField] private float shineAlphaDuration = 1f;
+
     [Space]
     [Header("Opening")]
     [SerializeField] private float presentShakeDuration;
@@ -35,17 +37,58 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] private PlayableDirector lidAnim;
     [SerializeField] private GameObject coinParticles;
+    [SerializeField] private CoinCounter coinCounter;
+    [SerializeField] private RectTransform bankroll;
+    [SerializeField] private float bankrollAnimTime;
+    [SerializeField] private Vector2 finalBankrollPos;
+    [SerializeField] private Vector3 finalBankrollScale;
+    [SerializeField] private PlayableDirector goBackBtnAnim;
 
+    private void Start()
+    {
+        if (coinCounter != null)
+        {
+            coinCounter.OnCounterFinished += OnCoinCounterFinished;
+        }
+       
+    }
 
-    private void ShowTextBubble(bool on,bool onAnim)
+    private void OnDestroy()
+    {
+        if (coinCounter != null)
+        {
+            coinCounter.OnCounterFinished -= OnCoinCounterFinished;
+        }
+    }
+
+    private void OnCoinCounterFinished()
+    {
+       DOTween.To(
+                    () => shineMaterial.GetFloat("_Alpha"),    
+                    x  => shineMaterial.SetFloat("_Alpha", x), 
+                    shineAlphaStart,                             
+                    shineAlphaDuration
+                )
+                .SetEase(Ease.OutBack);
+
+       bankroll.DOAnchorPos(finalBankrollPos, bankrollAnimTime).SetEase(Ease.OutBounce);
+       bankroll.DOScale(finalBankrollScale,bankrollAnimTime).SetEase(Ease.OutBounce)
+        .OnComplete(()=>
+        {
+            goBackBtnAnim.Play();
+        });
+    }
+
+    private void ShowTextBubble(bool on, bool onAnim)
     {
         presentTextBubble.gameObject.SetActive(on);
         presentTextBubble.localScale = Vector3.zero;
         if (onAnim)
-        presentTextBubble.DOScale(1, 0.5f)
-                            .SetDelay(0.3f)
-                            .SetEase(Ease.OutBack);
-
+        {
+            presentTextBubble.DOScale(1, 0.5f)
+                             .SetDelay(0.3f)
+                             .SetEase(Ease.OutBack);
+        }
     }
     
     public void PlayIntro()
@@ -66,12 +109,11 @@ public class GameManager : MonoBehaviour
             .OnComplete(() =>
             {
                 introButton.gameObject.SetActive(false);
-
                 RevealPresent();
-                ShowTextBubble(true,true);
-                
+                ShowTextBubble(true, true);
             });
     }
+
     private void RevealPresent()
     {
         if (presentTransform == null)
@@ -88,40 +130,39 @@ public class GameManager : MonoBehaviour
 
         if (shineUIElement == null )
         {
-            Debug.LogWarning("Shine UI element or its material is not assigned.");
+            Debug.LogWarning("Shine UI element is not assigned.");
         }
 
+        // Set initial transform states
         presentTransform.position = startPoint.position;  
         presentTransform.localScale = Vector3.zero;       
         presentTransform.localEulerAngles = Vector3.zero;
+
         shineUIElement.gameObject.SetActive(true);
         shineMaterial = shineUIElement.material;
         shineMaterial.SetFloat("_Alpha", shineAlphaStart);
 
-      
+        // Sequence for presenting
         Sequence revealSequence = DOTween.Sequence();
 
         revealSequence.Append(
-            presentTransform.DOMove(endPoint.position, moveDuration)
-                            .SetEase(Ease.OutBack)
+            presentTransform.DOMove(endPoint.position, moveDuration).SetEase(Ease.OutBack)
         );
         revealSequence.Join(
-            presentTransform.DOScale(scaleTarget, scaleUpDuration)
-                            .SetEase(Ease.OutBack)
+            presentTransform.DOScale(scaleTarget, scaleUpDuration).SetEase(Ease.OutBack)
         );
-
-     
         revealSequence.Join(
-            presentTransform.DOLocalRotate(
-                new Vector3(0f, rotationTarget, 0f), 
-                rotationDuration, 
-                RotateMode.FastBeyond360
-            )
-            .SetLoops(rotationLoops, LoopType.Restart)
-            .SetEase(Ease.OutBack)
+            presentTransform
+                .DOLocalRotate(
+                    new Vector3(0f, rotationTarget, 0f), 
+                    rotationDuration, 
+                    RotateMode.FastBeyond360
+                )
+                .SetLoops(rotationLoops, LoopType.Restart)
+                .SetEase(Ease.OutBack)
         );
         
-      
+        // If you have a custom shader with _Alpha property
         if (shineUIElement != null)
         {
             revealSequence.Join(
@@ -129,21 +170,22 @@ public class GameManager : MonoBehaviour
                     () => shineMaterial.GetFloat("_Alpha"),    
                     x  => shineMaterial.SetFloat("_Alpha", x), 
                     shineAlphaEnd,                             
-                    shineAlphaDuration                        
+                    shineAlphaDuration
                 )
                 .SetEase(Ease.OutBack)
             );
         }
-        
-
-
     }
 
     public void ShakePresent()
     {
         MatController colorAnim = presentTransform.GetComponent<MatController>();
-        colorAnim.StopColorAnimation();
+        if (colorAnim != null)
+        {
+            colorAnim.StopColorAnimation();
+        }
         ShowTextBubble(false,false);
+
         presentTransform.DOShakeRotation(
             presentShakeDuration,   
             presentShakeStrength,   
@@ -151,11 +193,17 @@ public class GameManager : MonoBehaviour
             presentShakeRandomness,
             true
         )
-        .OnComplete(()=>
+        .OnComplete(() =>
         {
-        coinParticles.SetActive(true);
-        lidAnim.Play();
-        Debug.LogWarning("YOU WON 100000000 COINS");
+            coinParticles.SetActive(true);
+            lidAnim.Play();
+            Debug.LogWarning("YOU WON 100000000 COINS");
         });
+    }
+
+    public void GoBack()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
     }
 }

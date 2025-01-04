@@ -14,5 +14,6 @@ public class PresentShakeController : MonoBehaviour
    private void OnMouseDown()
    {
         gameManager.ShakePresent();
+        GetComponent<BoxCollider>().enabled = false;
    }
 }

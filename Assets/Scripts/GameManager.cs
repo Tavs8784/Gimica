@@ -54,8 +54,11 @@ public class GameManager : MonoBehaviour
     private Sequence revealSequence;
 
 
-    private void Start()
+    private void Awake()
     {
+        Application.targetFrameRate = 60; 
+        QualitySettings.vSyncCount = 0;  
+        
         if (coinCounter != null)
         {
             coinCounter.OnCounterFinished += HandleCoinCounterFinished;

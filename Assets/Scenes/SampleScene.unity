@@ -6872,6 +6872,7 @@ MonoBehaviour:
   bankrollAnimTime: 0.8
   finalBankrollPos: {x: 0, y: 320}
   finalBankrollScale: {x: 2, y: 2, z: 1}
+  backBtn: {fileID: 869396123}
   goBackBtnAnim: {fileID: 518821054}
 --- !u!4 &1730276477
 Transform:

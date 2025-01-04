@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
     
     [Space]
     [Header("Go Back")]
+    [SerializeField] private RectTransform backBtn;
     [SerializeField] private PlayableDirector goBackBtnAnim;
 
     private void Start()
@@ -220,6 +221,7 @@ public class GameManager : MonoBehaviour
     {
         
         bankroll.DOScale(Vector3.zero,bankrollAnimTime/2).SetEase(Ease.InOutCubic);
+        backBtn.DOScale(Vector3.zero,bankrollAnimTime/2).SetEase(Ease.InOutCubic);
         revealSequence.PlayBackwards();
     }
 }

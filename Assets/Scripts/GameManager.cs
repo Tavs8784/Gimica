@@ -221,7 +221,7 @@ public class GameManager : MonoBehaviour
     {
         goBackBtnAnim.enabled = false;
         bankroll.DOScale(Vector3.zero, bankrollAnimTime / 2f).SetEase(Ease.InOutCubic);
-        backBtn.DOAnchorPos(new Vector3(0f,-3000f,0f), bankrollAnimTime / 2f).SetEase(Ease.InOutCubic);
+        backBtn.DOAnchorPos(new Vector3(40000f,0f,0f), bankrollAnimTime / 2f).SetEase(Ease.InElastic);
 
         if (revealSequence != null)
         {

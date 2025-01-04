@@ -3,6 +3,7 @@ using DG.Tweening;
 using UnityEngine.UI;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float presentShakeStrength;
     [SerializeField] private int presentShakeVibrato;
     [SerializeField] private float presentShakeRandomness;
+    private DG.Tweening.Sequence revealSequence;
     
     [SerializeField] private PlayableDirector lidAnim;
     [SerializeField] private GameObject coinParticles;
@@ -42,6 +44,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float bankrollAnimTime;
     [SerializeField] private Vector2 finalBankrollPos;
     [SerializeField] private Vector3 finalBankrollScale;
+    
+    [Space]
+    [Header("Go Back")]
     [SerializeField] private PlayableDirector goBackBtnAnim;
 
     private void Start()
@@ -69,10 +74,14 @@ public class GameManager : MonoBehaviour
                     shineAlphaStart,                             
                     shineAlphaDuration
                 )
-                .SetEase(Ease.OutBack);
+                .SetEase(Ease.OutBack)
+                .OnComplete(()=>
+                {
+                    shineUIElement.gameObject.SetActive(false);
+                });
 
-       bankroll.DOAnchorPos(finalBankrollPos, bankrollAnimTime).SetEase(Ease.OutBounce);
-       bankroll.DOScale(finalBankrollScale,bankrollAnimTime).SetEase(Ease.OutBounce)
+       bankroll.DOAnchorPos(finalBankrollPos, bankrollAnimTime).SetEase(Ease.OutCirc);
+       bankroll.DOScale(finalBankrollScale,bankrollAnimTime).SetEase(Ease.OutCirc)
         .OnComplete(()=>
         {
             goBackBtnAnim.Play();
@@ -142,8 +151,8 @@ public class GameManager : MonoBehaviour
         shineMaterial = shineUIElement.material;
         shineMaterial.SetFloat("_Alpha", shineAlphaStart);
 
-        // Sequence for presenting
-        Sequence revealSequence = DOTween.Sequence();
+        
+        revealSequence = DOTween.Sequence();
 
         revealSequence.Append(
             presentTransform.DOMove(endPoint.position, moveDuration).SetEase(Ease.OutBack)
@@ -161,6 +170,12 @@ public class GameManager : MonoBehaviour
                 .SetLoops(rotationLoops, LoopType.Restart)
                 .SetEase(Ease.OutBack)
         );
+        revealSequence.OnRewind(()=>
+        {
+            Scene currentScene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(currentScene.name);
+        });
+        revealSequence.SetAutoKill(false);
         
         // If you have a custom shader with _Alpha property
         if (shineUIElement != null)
@@ -203,7 +218,8 @@ public class GameManager : MonoBehaviour
 
     public void GoBack()
     {
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.name);
+        
+        bankroll.DOScale(Vector3.zero,bankrollAnimTime/2).SetEase(Ease.InOutCubic);
+        revealSequence.PlayBackwards();
     }
 }

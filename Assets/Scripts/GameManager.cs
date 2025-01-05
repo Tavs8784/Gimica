@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
                    {
                        introButton.gameObject.SetActive(false);
                        RevealPresent();
-                       ShowTextBubble(true, true);
+                      
                    });
     }
 
@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviour
             introParticles.SetActive(true);
         });
 
-         revealSequence.AppendInterval(0.8f);
+         revealSequence.AppendInterval(1.3f);
 
 
         revealSequence
@@ -152,6 +152,7 @@ public class GameManager : MonoBehaviour
                 Scene currentScene = SceneManager.GetActiveScene();
                 SceneManager.LoadScene(currentScene.name);
             })
+            .OnComplete(()=>  ShowTextBubble(true, true))
             .SetAutoKill(false);
 
         if (shineUIElement != null)

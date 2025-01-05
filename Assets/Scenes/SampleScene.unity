@@ -6363,8 +6363,8 @@ MonoBehaviour:
   ribbon4: {fileID: 1190189731}
   ribbon5: {fileID: 512273693}
   startColor: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 1}
-  endColor: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}
-  duration: 0.8
+  endColor: {r: 0.4716981, g: 0.4716981, b: 0.4716981, a: 1}
+  duration: 0.5
 --- !u!114 &1214182845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6849,7 +6849,7 @@ PrefabInstance:
     - target: {fileID: 7747541477286743421, guid: 00c42abb2e796426d91eba0b2f31a0d3,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 0.9
+      value: 0.85
       objectReference: {fileID: 0}
     - target: {fileID: 7747541477286743421, guid: 00c42abb2e796426d91eba0b2f31a0d3,
         type: 3}
@@ -6903,6 +6903,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7747541477286743421, guid: 00c42abb2e796426d91eba0b2f31a0d3,
         type: 3}
+      propertyPath: TrailModule.widthOverTrail.maxCurve.m_Curve.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747541477286743421, guid: 00c42abb2e796426d91eba0b2f31a0d3,
+        type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].inSlope
       value: -0
       objectReference: {fileID: 0}
@@ -6950,6 +6955,81 @@ PrefabInstance:
         type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[2].tangentMode
       value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747541477286743421, guid: 00c42abb2e796426d91eba0b2f31a0d3,
+        type: 3}
+      propertyPath: TrailModule.widthOverTrail.maxCurve.m_Curve.Array.data[1].time
+      value: 0.24675843
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747541477286743421, guid: 00c42abb2e796426d91eba0b2f31a0d3,
+        type: 3}
+      propertyPath: TrailModule.widthOverTrail.maxCurve.m_Curve.Array.data[2].time
+      value: 0.512075
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747541477286743421, guid: 00c42abb2e796426d91eba0b2f31a0d3,
+        type: 3}
+      propertyPath: TrailModule.widthOverTrail.maxCurve.m_Curve.Array.data[3].time
+      value: 0.70409894
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747541477286743421, guid: 00c42abb2e796426d91eba0b2f31a0d3,
+        type: 3}
+      propertyPath: TrailModule.widthOverTrail.maxCurve.m_Curve.Array.data[4].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747541477286743421, guid: 00c42abb2e796426d91eba0b2f31a0d3,
+        type: 3}
+      propertyPath: TrailModule.widthOverTrail.maxCurve.m_Curve.Array.data[1].value
+      value: 0.4229297
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747541477286743421, guid: 00c42abb2e796426d91eba0b2f31a0d3,
+        type: 3}
+      propertyPath: TrailModule.widthOverTrail.maxCurve.m_Curve.Array.data[2].value
+      value: 0.03226
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747541477286743421, guid: 00c42abb2e796426d91eba0b2f31a0d3,
+        type: 3}
+      propertyPath: TrailModule.widthOverTrail.maxCurve.m_Curve.Array.data[3].value
+      value: 0.4705819
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747541477286743421, guid: 00c42abb2e796426d91eba0b2f31a0d3,
+        type: 3}
+      propertyPath: TrailModule.widthOverTrail.maxCurve.m_Curve.Array.data[1].inSlope
+      value: 2.9041884
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747541477286743421, guid: 00c42abb2e796426d91eba0b2f31a0d3,
+        type: 3}
+      propertyPath: TrailModule.widthOverTrail.maxCurve.m_Curve.Array.data[3].inSlope
+      value: -2.4123394
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747541477286743421, guid: 00c42abb2e796426d91eba0b2f31a0d3,
+        type: 3}
+      propertyPath: TrailModule.widthOverTrail.maxCurve.m_Curve.Array.data[1].outSlope
+      value: 2.9041884
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747541477286743421, guid: 00c42abb2e796426d91eba0b2f31a0d3,
+        type: 3}
+      propertyPath: TrailModule.widthOverTrail.maxCurve.m_Curve.Array.data[3].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747541477286743421, guid: 00c42abb2e796426d91eba0b2f31a0d3,
+        type: 3}
+      propertyPath: TrailModule.widthOverTrail.maxCurve.m_Curve.Array.data[3].outSlope
+      value: -2.4123394
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747541477286743421, guid: 00c42abb2e796426d91eba0b2f31a0d3,
+        type: 3}
+      propertyPath: TrailModule.widthOverTrail.maxCurve.m_Curve.Array.data[4].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747541477286743421, guid: 00c42abb2e796426d91eba0b2f31a0d3,
+        type: 3}
+      propertyPath: TrailModule.widthOverTrail.maxCurve.m_Curve.Array.data[3].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747541477286743421, guid: 00c42abb2e796426d91eba0b2f31a0d3,
+        type: 3}
+      propertyPath: TrailModule.widthOverTrail.maxCurve.m_Curve.Array.data[4].outWeight
+      value: 0.33333334
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00c42abb2e796426d91eba0b2f31a0d3, type: 3}
@@ -6999,7 +7079,7 @@ MonoBehaviour:
   scaleTarget: {x: 1, y: 1, z: 1}
   shineUIElement: {fileID: 2083995303}
   shineAlphaStart: 0
-  shineAlphaEnd: 0.7
+  shineAlphaEnd: 0.5
   shineAlphaDuration: 0.3
   presentShakeDuration: 1.5
   presentShakeStrength: 6.82

@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Intro")]
     [SerializeField] private RectTransform introButton;
+    [SerializeField] private GameObject introParticles;
     [SerializeField] private float shakeDuration = 0.5f;
     [SerializeField] private float shakeStrength = 50f;
     [SerializeField] private int shakeVibrato = 10;
@@ -76,6 +77,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayIntro()
     {
+       
         RevealIntroButton();
     }
 
@@ -125,6 +127,14 @@ public class GameManager : MonoBehaviour
         shineMaterial.SetFloat("_Alpha", shineAlphaStart);
 
         revealSequence = DOTween.Sequence();
+
+         revealSequence.AppendCallback(() =>
+        {
+            introParticles.SetActive(true);
+        });
+
+         revealSequence.AppendInterval(0.8f);
+
 
         revealSequence
             .Append(presentTransform.DOMove(endPoint.position, moveDuration).SetEase(Ease.OutBack))

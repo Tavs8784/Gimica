@@ -25,36 +25,47 @@ public class CoinCounter : MonoBehaviour
     
     private void Awake() 
     {
-        timeToReachTarget = targetParticleSystem.main.duration;  
+        if (targetParticleSystem != null)
+        {
+            timeToReachTarget = targetParticleSystem.main.duration;  
+        }
+        else
+        {
+            StartBlinking();
+        }
+        
     }
 
     private void Update()
     {
-        if (targetParticleSystem.isPlaying)
-        {
-            if (!wasPlaying)
+        if (targetParticleSystem != null)
+        {   
+            if (targetParticleSystem.isPlaying)
             {
-                StartCounting();
-            }
+                if (!wasPlaying)
+                {
+                    StartCounting();
+                }
 
-            if (isCounting)
-            {
-                currentTime += Time.deltaTime;
-                float progress = currentTime / timeToReachTarget;
-                int range = finalValue - startValue;
-                int displayValue = startValue + Mathf.FloorToInt(progress * range);
-                countText.text = displayValue.ToString();
-            }
+                if (isCounting)
+                {
+                    currentTime += Time.deltaTime;
+                    float progress = currentTime / timeToReachTarget;
+                    int range = finalValue - startValue;
+                    int displayValue = startValue + Mathf.FloorToInt(progress * range);
+                    countText.text = displayValue.ToString();
+                }
 
-            wasPlaying = true;
-        }
-        else
-        {
-            if (wasPlaying && isCounting)
-            {
-                StopCounting();
+                wasPlaying = true;
             }
-            wasPlaying = false;
+            else
+            {
+                if (wasPlaying && isCounting)
+                {
+                    StopCounting();
+                }
+                wasPlaying = false;
+            }
         }
     }
 

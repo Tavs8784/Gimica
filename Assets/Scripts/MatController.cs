@@ -29,10 +29,7 @@ public class MatController : MonoBehaviour
         {
             _mpbs[i] = new MaterialPropertyBlock();
         }
-    }
 
-    private void Start()
-    {
         _currentColor = startColor;
 
      
@@ -44,6 +41,8 @@ public class MatController : MonoBehaviour
                .SetEase(Ease.Linear)
                .OnUpdate(UpdateColors);
     }
+
+  
 
 
     private void UpdateColors()

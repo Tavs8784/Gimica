@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int shakeVibrato = 10;
     [SerializeField] private float shakeRandomness = 90f;
     [SerializeField] private Transform presentTransform;
-    [SerializeField] private Transform presentTextBubble;
+
     [SerializeField] private Transform startPoint;
     [SerializeField] private Transform endPoint;
     [SerializeField] private float moveDuration = 2f;
@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float rotationTarget = 360f;
     [SerializeField] private float scaleUpDuration = 0.5f;
     [SerializeField] private Vector3 scaleTarget;
-    [SerializeField] private Image shineUIElement;
+    [SerializeField] private MeshRenderer shineUIElement;
     [SerializeField] private float shineAlphaStart = 0f;
     [SerializeField] private float shineAlphaEnd = 1f;
     [SerializeField] private float shineAlphaDuration = 1f;
@@ -46,10 +46,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Vector2 finalBankrollPos;
     [SerializeField] private Vector3 finalBankrollScale;
 
-    [Space]
-    [Header("Go Back")]
-    [SerializeField] private RectTransform backBtn;
-    [SerializeField] private PlayableDirector goBackBtnAnim;
+
 
     private Material shineMaterial;
     private Sequence revealSequence;
@@ -152,7 +149,7 @@ public class GameManager : MonoBehaviour
                 Scene currentScene = SceneManager.GetActiveScene();
                 SceneManager.LoadScene(currentScene.name);
             })
-            .OnComplete(()=>  ShowTextBubble(true, true))
+            .OnComplete(ShakePresent)
             .SetAutoKill(false);
 
         if (shineUIElement != null)
@@ -169,18 +166,7 @@ public class GameManager : MonoBehaviour
     }
 
    
-    private void ShowTextBubble(bool isVisible, bool animateScale)
-    {
-        presentTextBubble.gameObject.SetActive(isVisible);
-        presentTextBubble.localScale = Vector3.zero;
 
-        if (animateScale)
-        {
-            presentTextBubble.DOScale(1f, 0.5f)
-                             .SetDelay(0.3f)
-                             .SetEase(Ease.OutBack);
-        }
-    }
 
 
     public void ShakePresent()
@@ -191,7 +177,7 @@ public class GameManager : MonoBehaviour
             colorAnim.StopColorAnimation();
         }
 
-        ShowTextBubble(false, false);
+
 
         presentTransform.DOShakeRotation(
             presentShakeDuration,
@@ -223,24 +209,10 @@ public class GameManager : MonoBehaviour
                 shineUIElement.gameObject.SetActive(false);
             });
 
-        bankroll.DOAnchorPos(finalBankrollPos, bankrollAnimTime).SetEase(Ease.OutCirc);
-        bankroll.DOScale(finalBankrollScale, bankrollAnimTime).SetEase(Ease.OutCirc)
-            .OnComplete(() =>
-            {
-                goBackBtnAnim.Play();
-            });
+        bankroll.DOAnchorPos(finalBankrollPos, bankrollAnimTime).SetEase(Ease.OutCubic);
+        bankroll.DOScale(finalBankrollScale, bankrollAnimTime).SetEase(Ease.OutCubic);
     }
 
-    public void GoBack()
-    {
-        goBackBtnAnim.enabled = false;
-        bankroll.DOScale(Vector3.zero, bankrollAnimTime / 2f).SetEase(Ease.InOutCubic);
-        backBtn.DOAnchorPos(new Vector3(0f,-2000f,0f), bankrollAnimTime / 2f).SetEase(Ease.InCubic);
 
-        if (revealSequence != null)
-        {
-            revealSequence.PlayBackwards();
-        }
-    }
 
 }

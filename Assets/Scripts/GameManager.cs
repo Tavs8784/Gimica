@@ -203,7 +203,7 @@ public class GameManager : MonoBehaviour
                 shineAlphaStart,
                 shineAlphaDuration
             )
-            .SetEase(Ease.OutBack)
+            .SetEase(Ease.OutCubic)
             .OnComplete(() =>
             {
                 shineUIElement.gameObject.SetActive(false);
